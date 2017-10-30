@@ -6,6 +6,7 @@ honn verkefni 2
 ### Creating project
 
 dotnet new webapi -- creates a new (web) api project
+
 dotnet new classlib -- creates a new class library project
 
 ### Adding project dependencies
