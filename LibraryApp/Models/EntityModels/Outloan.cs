@@ -26,7 +26,7 @@ namespace LibraryApp.Models.EntityModels
         /// <summary>
         /// The date of when the book was returned
         /// </summary>
-        public DateTime ReturnDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
         /// <summary>
         /// Fast way to keep track of whether a book has been returned or not
         /// </summary>

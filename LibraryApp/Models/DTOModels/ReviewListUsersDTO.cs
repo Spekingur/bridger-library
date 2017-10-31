@@ -6,6 +6,11 @@ namespace LibraryApp.Models.DTOModels
     public class ReviewListUsersDTO
     {
         /// <summary>
+        /// Id of the review
+        /// </summary>
+        /// <returns></returns>
+        public int Id { get; set; }
+        /// <summary>
         /// Name of the user that made review
         /// </summary>
         public string Name { get; set; }

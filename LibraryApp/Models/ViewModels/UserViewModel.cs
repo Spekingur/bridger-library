@@ -21,5 +21,7 @@ namespace LibraryApp.Models.ViewModels
         /// Telephone of the user
         /// </summary>
         public string Telephone { get; set; }
+
+        public int Usergroup { get; set; }
     }
 }

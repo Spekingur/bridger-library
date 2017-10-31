@@ -8,6 +8,11 @@ namespace LibraryApp.Models.DTOModels
     public class OutloanListUsersDTO
     {
         /// <summary>
+        /// Id of loan
+        /// </summary>
+        /// <returns></returns>
+        public int Id { get; set; }
+        /// <summary>
         /// Name of the user
         /// </summary>
         public string Name { get; set; }

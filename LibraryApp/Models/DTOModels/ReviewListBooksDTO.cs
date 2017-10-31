@@ -6,12 +6,16 @@ namespace LibraryApp.Models.DTOModels
     public class ReviewListBooksDTO
     {
         /// <summary>
+        /// Id of the review
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
         /// Title of the rated book
         /// </summary>
         public string Title { get; set; }        
         /// <summary>
         /// The rating of the book
         /// </summary>
-        public string Rating { get; set; }
+        public int Rating { get; set; }
     }
 }

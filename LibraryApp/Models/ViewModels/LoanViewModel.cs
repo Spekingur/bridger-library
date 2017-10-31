@@ -14,7 +14,7 @@ namespace LibraryApp.Models.ViewModels
         /// <summary>
         /// Date of return book
         /// </summary>
-        public DateTime ReturnDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
         /// <summary>
         /// Whether book has been returned or not
         /// </summary>

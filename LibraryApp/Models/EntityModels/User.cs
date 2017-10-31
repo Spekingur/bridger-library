@@ -37,5 +37,7 @@ namespace LibraryApp.Models.EntityModels
         /// Date of when the user was registered
         /// </summary>
         public DateTime RegisterDate { get; set; }
+
+        public int Usergroup { get; set; }
     }
 }

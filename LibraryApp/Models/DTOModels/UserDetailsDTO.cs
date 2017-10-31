@@ -36,6 +36,9 @@ namespace LibraryApp.Models.DTOModels
         /// Date of when the user registered
         /// </summary>
         public DateTime RegisterDate { get; set; }
+
+        public int Usergroup { get; set; }
+
         /// <summary>
         /// List of loan history of the user
         /// </summary>

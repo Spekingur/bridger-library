@@ -28,6 +28,6 @@ namespace LibraryApp.Models.DTOModels
         /// <summary>
         /// The usergroup the user belongs to
         /// </summary>
-        public string Usergroup { get; set; }
+        public int Usergroup { get; set; }
     }
 }
