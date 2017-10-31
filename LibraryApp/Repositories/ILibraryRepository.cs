@@ -5,7 +5,7 @@ using LibraryApp.Models.ViewModels;
 namespace LibraryApp.Repositories
 {
     /// <summary>
-    /// 
+    /// Interface for a library repo
     /// </summary>
     public interface ILibraryRepository
     {
