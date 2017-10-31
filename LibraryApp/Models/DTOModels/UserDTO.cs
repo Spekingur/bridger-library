@@ -6,6 +6,10 @@ namespace LibraryApp.Models.DTOModels
     public class UserDTO
     {
         /// <summary>
+        /// ID of user
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
         /// Name of user
         /// </summary>
         public string Name { get; set; }

@@ -6,6 +6,10 @@ namespace LibraryApp.Models.DTOModels
     public class BookLiteDTO
     {
         /// <summary>
+        /// ID of the book
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
         /// Title of the book
         /// </summary>
         public string Title { get; set; }
