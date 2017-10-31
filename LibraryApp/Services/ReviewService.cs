@@ -53,7 +53,7 @@ namespace LibraryApp.Services
         public ReviewDetailsDTO UpdateBookReview(int userId, int bookId, ReviewViewModel updatedReview)
         {
             var updateReview = _repo.UpdateBookReview(userId, bookId, updatedReview);
-            return updatedReview;
+            return updateReview;
         }
     }
 }
