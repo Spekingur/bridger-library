@@ -12,10 +12,12 @@ namespace API.Controllers
     public class BookController : Controller
     {
         private IBookService _bookService;
+        private IReviewService _reviewService;
 
-        public BookController(IBookService bookService)
+        public BookController(IBookService bookService, IReviewService reviewService)
         {
             _bookService = bookService;
+            _reviewService = reviewService;
         }
 
         // GET /books
@@ -78,6 +80,46 @@ namespace API.Controllers
             if(!success) { return NotFound(); }
             
             return NoContent();
+        }
+
+        // GET /books/reviews
+        [HttpGet]
+        [Route("reviews")]
+        public IActionResult GetAllReviews()
+        {
+            return Ok();
+        }
+
+        // GET /books/5/reviews
+        [HttpGet]
+        [Route("{bookId}/reviews")]
+        public IActionResult GetReviewByBookId(int bookId)
+        {
+            return Ok();
+        }
+
+        // GET /books/5/reviews/2
+        [HttpGet]
+        [Route("{bookId}/reviews/{userId}")]
+        public IActionResult GetReviewByBookIdAndUserId(int bookId, int userId)
+        {
+            return Ok();
+        }
+
+        // PUT /books/5/reviews/2
+        [HttpPut]
+        [Route("{bookId}/reviews/{userId}")]
+        public IActionResult UpdateReview(int bookId, int userId, [FromBody]ReviewViewModel updatedReview)
+        {
+            return Ok();
+        }
+
+        // DELETE /books/5/reviews/2
+        [HttpDelete]
+        [Route("{bookId}/reviews/{userId}")]
+        public IActionResult RemoveReview(int bookId, int userId)
+        {
+            return Ok();
         }
     }
 }
