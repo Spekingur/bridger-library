@@ -34,7 +34,12 @@ namespace LibraryApp.Repositories
 
         public IEnumerable<BookDTO> GetAllBooks()
         {
-            throw new NotImplementedException();
+            DateTime date1 = new DateTime(2016, 3, 6);
+            DateTime date2 = new DateTime(2017, 12, 12);
+            return new List<BookDTO> {
+                new BookDTO {Id = 1, Title = "Book 1", Author = "Author 1", ReleaseDate = date1, Isbn = "Isbn 1"},
+                new BookDTO {Id = 2, Title = "Book 2", Author = "Author 2", ReleaseDate = date2, Isbn = "Isbn 2"}
+            };
         }
 
         public IEnumerable<ReviewDTO> GetAllReviews()
