@@ -1,34 +1,52 @@
 using System.Collections.Generic;
 using LibraryApp.Models.DTOModels;
 using LibraryApp.Models.ViewModels;
+using LibraryApp.Repositories;
 
 namespace LibraryApp.Services
 {
     public class UserService : IUserService
     {
+        private IUserRepository _repo;
+
+        public UserService(IUserRepository repo)
+        {
+            _repo = repo;
+        }
+        
         public UserDetailsDTO AddNewUser(UserViewModel newUser)
         {
-            throw new System.NotImplementedException();
+            var user = _repo.AddNewUser(newUser);
+            return user;
+        }
+
+        public IEnumerable<UserDTO> GetAllActiveUsers()
+        {
+            var users = _repo.GetAllActiveUsers();
+            return users;
         }
 
         public IEnumerable<UserDTO> GetAllUsers()
         {
-            throw new System.NotImplementedException();
+            var users = _repo.GetAllUsers();
+            return users;
         }
 
         public UserDetailsDTO GetUserById(int userId)
         {
-            throw new System.NotImplementedException();
+            var user = _repo.GetUserById(userId);
+            return user;
         }
 
         public bool RemoveUser(int userId)
         {
-            throw new System.NotImplementedException();
+            return _repo.RemoveUser(userId);
         }
 
-        public UserDetailsDTO UpdateUserInfo(int userId, UserViewModel updateUser)
+        public UserDetailsDTO UpdateUserInfo(int userId, UserViewModel updatedUser)
         {
-            throw new System.NotImplementedException();
+            var user = _repo.UpdateUserInfo(userId, updatedUser);
+            return user;
         }
     }
 }

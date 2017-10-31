@@ -8,9 +8,9 @@ namespace LibraryApp.Services
 {
     public class BookService : IBookService
     {
-        private ILibraryRepository _repo;
+        private IBookRepository _repo;
 
-        public BookService(ILibraryRepository repo)
+        public BookService(IBookRepository repo)
         {
             _repo = repo;
         }
