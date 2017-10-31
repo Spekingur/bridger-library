@@ -15,3 +15,19 @@ dotnet add _link to csproj file to add to_ reference _link to csproj file that i
 
 dotnet restore -- restores the project in question and updates if there are changes in the csproj file (such as adding new dependencies)
 
+### Setting up database
+#### In Repo folder
+dotnet add package Microsoft.EntityFramworkCore.Sqlite
+
+dotnet add package Microsoft.EntityFramworkCore.Design
+
+#### In Api folder
+dotnet ef migrations add InitialCreate
+
+dotnet ef database update
+
+
+### Building and running
+dotnet build
+
+dotnet run
