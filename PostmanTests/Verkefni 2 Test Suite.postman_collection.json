@@ -1,0 +1,98 @@
+{
+	"info": {
+		"name": "Verkefni 2 Test Suite",
+		"_postman_id": "32aee898-778c-7c45-0dc8-8a75c7e7b509",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Books",
+			"description": "",
+			"item": [
+				{
+					"name": "http://localhost:5000/books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status code 200\", function () {",
+									"    pm.response.to.be.ok; ",
+									"});",
+									"",
+									"pm.test(\"response has a json body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"description": "",
+			"item": [
+				{
+					"name": "http://localhost:5000/users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status code 200\", function () {",
+									"    pm.response.to.be.ok; ",
+									"});",
+									"",
+									"pm.test(\"response has a json body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
