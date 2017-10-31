@@ -7,6 +7,7 @@ namespace LibraryApp.Models.DTOModels
     /// </summary>
     public class OutloanDTO
     {
+        public int Id { get; set; }
         /// <summary>
         /// Name of the user that has the book
         /// </summary>
