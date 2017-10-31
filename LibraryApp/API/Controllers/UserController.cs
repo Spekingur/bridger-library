@@ -13,11 +13,13 @@ namespace API.Controllers
     {
         private IUserService _userService;
         private IOutloanService _outloanService;
+        private IReviewService _reviewService;
 
-        public UserController(IUserService userService, IOutloanService outloanService)
+        public UserController(IUserService userService, IOutloanService outloanService, IReviewService reviewService)
         {
             _userService = userService;
             _outloanService = outloanService;
+            _reviewService = reviewService;
         }
 
         // GET /users
@@ -132,7 +134,11 @@ namespace API.Controllers
         [Route("{userId}/reviews")]
         public IActionResult GetUserReviews(int userId)
         {
-            return Ok();
+            var reviews = _reviewService.GetReviewsUserHasMade(userId);
+
+            if(reviews == null) { return NotFound(); }
+
+            return Ok(reviews);
         }
 
         // GET /users/5/reviews/2
