@@ -7,6 +7,8 @@ namespace LibraryApp.Models.ViewModels
     /// </summary>
     public class LoanViewModel
     {
+        public int UserId { get; set; }
+        public int BookId { get; set; }
         /// <summary>
         /// Date of outloan of book
         /// </summary>
