@@ -34,12 +34,14 @@ namespace API
             services.AddTransient<IReviewRepository, ReviewRepository>();
             services.AddTransient<IRecommendationRepository, RecommendationRepository>();
             services.AddTransient<IReportRepository, ReportRepository>();
+            services.AddTransient<IOutloanRepository, OutloanRepository>();
             /* --- SERVICES --- */
             services.AddTransient<IBookService, BookService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IReviewService, ReviewService>();
             services.AddTransient<IRecommendationService, RecommendationService>();
             services.AddTransient<IReportService, ReportService>();
+            services.AddTransient<IOutloanService, OutloanService>();
             /* --- DATABASE CONNECTION --- */
             //services.AddDbContext<AppDataContext>(options => options.UseSqlite("Data source=../Repositories/Db/LibraryApp.db"));
             services.AddDbContext<AppDataContext>(options => 
