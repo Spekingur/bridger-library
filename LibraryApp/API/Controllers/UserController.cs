@@ -203,6 +203,7 @@ namespace API.Controllers
         {
             var recommendations = _recommendationService.GetRecommendationsByUserId(userId);
             if(recommendations == null) { return NotFound(); }
+            if(recommendations.Count() < 1) { return NotFound(); }
 
             return Ok(recommendations);
         }
