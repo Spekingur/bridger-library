@@ -17,6 +17,16 @@ namespace LibraryApp.Repositories
 
         public RecommendationDTO AddNewRecommendation(int userId, RecommendationViewModel newRecommendation)
         {
+            var user = (from u in _db.Users
+                            where u.Id == userId
+                            select u).SingleOrDefault();
+
+            var book = (from b in _db.Books
+                        where b.Id == newRecommendation.BookId
+                        select b).SingleOrDefault();
+
+            if(user == null || book == null) { return null; }
+
             var newRec = new Recommendation
             {
                 UserId = userId,
@@ -25,10 +35,6 @@ namespace LibraryApp.Repositories
 
             _db.Recommendations.Add(newRec);
             _db.SaveChanges();
-
-            var book = (from b in _db.Books
-                            where b.Id == newRec.BookId
-                            select b).SingleOrDefault();
 
             return new RecommendationDTO
             {

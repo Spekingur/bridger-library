@@ -18,6 +18,16 @@ namespace LibraryApp.Repositories
 
         public OutloanDTO AddNewLoan(int userId, int bookId)
         {
+            var user = (from u in _db.Users
+                        where u.Id == userId
+                        select u).SingleOrDefault();
+
+            var book = (from b in _db.Books
+                        where b.Id == bookId
+                        select b).SingleOrDefault();
+
+            if(book == null || user == null) { return null; }
+
             var loan = new Outloan
             {
                 BookId = bookId,
@@ -33,12 +43,8 @@ namespace LibraryApp.Repositories
             return new OutloanDTO
             {
                 Id = loan.Id,
-                UserName = (from u in _db.Users
-                                where u.Id == userId
-                                select u.Name).SingleOrDefault(),
-                BookTitle = (from b in _db.Books
-                                where b.Id == bookId
-                                select b.Title).SingleOrDefault(),
+                UserName = user.Name,
+                BookTitle = book.Title,
                 LoanDate = loan.LoanDate
             };
         }
@@ -87,6 +93,15 @@ namespace LibraryApp.Repositories
 
         public OutloanDetailsDTO UpdateLoan(int userId, int bookId, LoanViewModel updateLoan)
         {
+            var user = (from u in _db.Users
+                        where u.Id == userId
+                        select u).SingleOrDefault();
+            var book = (from b in _db.Books
+                        where b.Id == bookId
+                        select b).SingleOrDefault();
+
+            if (user == null || book == null) { return null; }
+
             var loan = (from l in _db.Outloans
                             where (l.UserId == userId) && (l.BookId == bookId)
                             select l).SingleOrDefault();
@@ -103,12 +118,8 @@ namespace LibraryApp.Repositories
             
             return new OutloanDetailsDTO
             {
-                Name = (from u in _db.Users
-                            where u.Id == loan.UserId
-                            select u.Name).SingleOrDefault(),
-                Title = (from b in _db.Books
-                            where b.Id == loan.BookId
-                            select b.Title).SingleOrDefault(),
+                Name = user.Name,
+                Title = book.Title,
                 LoanDate = loan.LoanDate,
                 ReturnDate = loan.ReturnDate,
                 Returned = loan.Returned

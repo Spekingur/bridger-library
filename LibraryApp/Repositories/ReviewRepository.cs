@@ -21,6 +21,16 @@ namespace LibraryApp.Repositories
 
         public ReviewDTO AddNewReview(int bookId, int userId, ReviewViewModel newReview)
         {
+            var user = (from u in _db.Users
+                        where u.Id == userId
+                        select u).SingleOrDefault();
+
+            var book = (from b in _db.Books
+                        where b.Id == bookId
+                        select b).SingleOrDefault();
+
+            if(user == null || book == null) { return null; }
+
             var review = new Review
             {
                 BookId = bookId,
@@ -37,8 +47,8 @@ namespace LibraryApp.Repositories
             return new ReviewDTO
             {
                 Id = review.Id,
-                Title = null,
-                Name = null,
+                Title = book.Title,
+                Name = user.Name,
                 Rating = review.Rating
             };
             
@@ -131,6 +141,8 @@ namespace LibraryApp.Repositories
             var review = (from r in _db.Reviews
                             where (r.BookId == bookId) && (r.UserId == userId)
                             select r).SingleOrDefault();
+            
+            if(review == null) { return null ;}
             
             review.Rating = updatedReview.Rating;
             review.Text = updatedReview.Text;
