@@ -35,7 +35,7 @@ namespace API.Controllers
 
         // GET /users/5
         [HttpGet]
-        [Route("{id}")]
+        [Route("{id}", Name = "GetUserById")]
         public IActionResult GetUserById(int id)
         {
             var user = _userService.GetUserById(id);
@@ -56,7 +56,8 @@ namespace API.Controllers
 
             var user = _userService.AddNewUser(newUser);
 
-            return Ok(user);
+            //return Ok(user);
+            return CreatedAtRoute("GetUserById", new { Id = user.Id }, newUser);
         }
 
         // PUT /users/5

@@ -49,11 +49,11 @@ namespace API.Controllers
             if(newBook == null) { return BadRequest(); }
             if(!ModelState.IsValid) { return StatusCode(412); }
 
-            var user = _bookService.AddNewBook(newBook);
+            var book = _bookService.AddNewBook(newBook);
 
             //return Ok(user);
             //return Created($"/books/newBook.Id", newBook);
-            return CreatedAtRoute("GetBookById", new { Id = user.Id }, newBook);
+            return CreatedAtRoute("GetBookById", new { Id = book.Id }, newBook);
         }
 
         // PUT /books/5
