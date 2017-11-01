@@ -1,0 +1,2043 @@
+{
+	"info": {
+		"name": "Verkefni 2 Test Suite",
+		"_postman_id": "32aee898-778c-7c45-0dc8-8a75c7e7b509",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Books",
+			"description": "",
+			"item": [
+				{
+					"name": "Add one test book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"adding book should give 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"get a json repsonse\", function () {",
+									"   pm.response.to.be.json; ",
+									"});",
+									"",
+									"pm.test(\"get same value for book as sent in\", function () {",
+									"    //var body = JSON.parse(responseBody);",
+									"    //pm.expect(body.Title).to.eql(pm.request.Title);",
+									"    pm.expect(pm.response.Title).to.eql(pm.request.Title);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Title\": \"TestBook 1\",\n\t\"Author\": \"TestAuthor 1\",\n\t\"ReleaseDate\": \"2015-02-03\",\n\t\"Isbn\": \"TestIsbn 1\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status code 200\", function () {",
+									"    pm.response.to.be.ok; ",
+									"});",
+									"",
+									"pm.test(\"response has a json body\", function () {",
+									"    //pm.response.to.be.withBody;",
+									"    pm.response.to.have.jsonBody();",
+									"});",
+									"",
+									"pm.test(\"response's json body is not empty\", function () {",
+									"    pm.expect(responseBody.length).not.eql(0);",
+									"    pm.expect(responseBody).not.eql(null);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get book with Id=1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status code 200\", function () {",
+									"    pm.response.to.be.ok; ",
+									"});",
+									"",
+									"pm.test(\"response to have id 1\", function () {",
+									"    var body = JSON.parse(responseBody);",
+									"    pm.expect(body.id).to.eql(1);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update info on book with Id=1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status code 200\", function () {",
+									"    pm.response.to.be.ok; ",
+									"});",
+									"",
+									"pm.test(\"response to have updated info\", function () {",
+									"    var body = JSON.parse(responseBody);",
+									"    pm.expect(body.Title).to.eql(pm.request.Title);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Title\": \"Title Updated\",\n\t\"Author\": \"Author Updated\",\n\t\"ReleaseDate\": \"2011-01-01\",\n\t\"Isbn\": \"Isbn Updated\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/books/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add another test book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"adding book should give 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"get a json repsonse\", function () {",
+									"   pm.response.to.be.json; ",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Title\": \"TestBook 2\",\n\t\"Author\": \"TestAuthor 2\",\n\t\"ReleaseDate\": \"2012-12-12\",\n\t\"Isbn\": \"TestIsbn 2\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books"
+							]
+						},
+						"description": "To be deleted"
+					},
+					"response": []
+				},
+				{
+					"name": "Get book with Id=2 (to show it exists)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status code 200\", function () {",
+									"    pm.response.to.be.ok; ",
+									"});",
+									"",
+									"pm.test(\"response to have id 2\", function () {",
+									"    var body = JSON.parse(responseBody);",
+									"    pm.expect(body.id).to.eql(2);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"2"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove book with Id=2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status success\", function () {",
+									"    pm.response.to.be.success; ",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"2"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add another book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"adding book should give 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"get a json repsonse\", function () {",
+									"   pm.response.to.be.json; ",
+									"});",
+									"",
+									"pm.test(\"get same value for book as sent in\", function () {",
+									"    //var body = JSON.parse(responseBody);",
+									"    //pm.expect(body.Title).to.eql(pm.request.Title);",
+									"    pm.expect(pm.response.Title).to.eql(pm.request.Title);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Title\": \"TestBook 3\",\n\t\"Author\": \"TestAuthor 3\",\n\t\"ReleaseDate\": \"2017-01-23\",\n\t\"Isbn\": \"TestIsbn 3\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add another book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"adding book should give 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"get a json repsonse\", function () {",
+									"   pm.response.to.be.json; ",
+									"});",
+									"",
+									"pm.test(\"get same value for book as sent in\", function () {",
+									"    //var body = JSON.parse(responseBody);",
+									"    //pm.expect(body.Title).to.eql(pm.request.Title);",
+									"    pm.expect(pm.response.Title).to.eql(pm.request.Title);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Title\": \"TestBook 4\",\n\t\"Author\": \"TestAuthor 4\",\n\t\"ReleaseDate\": \"2014-04-04\",\n\t\"Isbn\": \"TestIsbn 4\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status code 200\", function () {",
+									"    pm.response.to.be.ok; ",
+									"});",
+									"",
+									"pm.test(\"response has a json body\", function () {",
+									"    //pm.response.to.be.withBody;",
+									"    pm.response.to.have.jsonBody();",
+									"});",
+									"",
+									"pm.test(\"response's json body is not empty\", function () {",
+									"    pm.expect(responseBody.length).not.eql(0);",
+									"    pm.expect(responseBody).not.eql(null);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get book that doesn't exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"book does not exist\"), function () {",
+									"    pm.response.to.be.notFound;",
+									"};"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books/1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"1000"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update book that doesn't exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"book does not exist\"), function () {",
+									"    pm.response.to.be.notFound;",
+									"};"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Title\": \"Title Updated\",\n\t\"Author\": \"Author Updated\",\n\t\"ReleaseDate\": \"2011-01-01\",\n\t\"Isbn\": \"Isbn Updated\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/books/1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"1000"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove book that doesn't exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"book does not exist\"), function () {",
+									"    pm.response.to.be.notFound;",
+									"};"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books/1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"1000"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"description": "",
+			"item": [
+				{
+					"name": "Add one user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"adding user should give 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"get a json repsonse\", function () {",
+									"   pm.response.to.be.json; ",
+									"});",
+									"",
+									"pm.test(\"get same value for user as sent in\", function () {",
+									"    //var body = JSON.parse(responseBody);",
+									"    //pm.expect(body.Title).to.eql(pm.request.Title);",
+									"    pm.expect(pm.response.Name).to.eql(pm.request.Name);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"TestName 1\",\n\t\"Address\": \"TestAddress 1\",\n\t\"Email\": \"test1@test.com\",\n\t\"Telephone\": \"111-1111\",\n\t\"Usergroup\": 2\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status code 200\", function () {",
+									"    pm.response.to.be.ok; ",
+									"});",
+									"",
+									"pm.test(\"response has a json body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"response's json body is not empty\", function () {",
+									"    pm.expect(responseBody.length).not.eql(0);",
+									"    pm.expect(responseBody).not.eql(null);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get user with ID=1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status code 200\", function () {",
+									"    pm.response.to.be.ok; ",
+									"});",
+									"",
+									"pm.test(\"response to have id 1\", function () {",
+									"    var body = JSON.parse(responseBody);",
+									"    pm.expect(body.id).to.eql(1);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update info on user with ID=1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status code 200\", function () {",
+									"    pm.response.to.be.ok; ",
+									"});",
+									"",
+									"pm.test(\"response to have updated info\", function () {",
+									"    var body = JSON.parse(responseBody);",
+									"    pm.expect(body.Name).to.eql(pm.request.Name);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"TestName 1 Updated\",\n\t\"Address\": \"TestAddress 1 Updated\",\n\t\"Email\": \"updated1@test.com\",\n\t\"Telephone\": \"121-1221\",\n\t\"Usergroup\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add another user to be deleted",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"adding user should give 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"get a json repsonse\", function () {",
+									"   pm.response.to.be.json; ",
+									"});",
+									"",
+									"pm.test(\"get same value for user as sent in\", function () {",
+									"    pm.expect(pm.response.Name).to.eql(pm.request.Name);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"TestName 2\",\n\t\"Address\": \"TestAddress 2\",\n\t\"Email\": \"test2@test.com\",\n\t\"Telephone\": \"222-2222\",\n\t\"Usergroup\": 2\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users"
+							]
+						},
+						"description": "Adding new user to test deletion"
+					},
+					"response": []
+				},
+				{
+					"name": "Get user with ID=2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status code 200\", function () {",
+									"    pm.response.to.be.ok; ",
+									"});",
+									"",
+									"pm.test(\"response to have id 2\", function () {",
+									"    var body = JSON.parse(responseBody);",
+									"    pm.expect(body.id).to.eql(2);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"2"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove user with ID=2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status success\", function () {",
+									"    pm.response.to.be.success; ",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"2"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users again",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status code 200\", function () {",
+									"    pm.response.to.be.ok; ",
+									"});",
+									"",
+									"pm.test(\"response has a json body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"response's json body is not empty\", function () {",
+									"    pm.expect(responseBody.length).not.eql(0);",
+									"    pm.expect(responseBody).not.eql(null);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "User with ID=2 is not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"user does not exist\"), function () {",
+									"    pm.response.to.be.notFound;",
+									"};"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"2"
+							]
+						},
+						"description": "Checking for an ID that doesn't exist"
+					},
+					"response": []
+				},
+				{
+					"name": "Add another user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"adding user should give 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"get a json repsonse\", function () {",
+									"   pm.response.to.be.json; ",
+									"});",
+									"",
+									"pm.test(\"get same value for user as sent in\", function () {",
+									"    //var body = JSON.parse(responseBody);",
+									"    //pm.expect(body.Title).to.eql(pm.request.Title);",
+									"    pm.expect(pm.response.Name).to.eql(pm.request.Name);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"TestName 3\",\n\t\"Address\": \"TestAddress 3\",\n\t\"Email\": \"test31@test.com\",\n\t\"Telephone\": \"333-3333\",\n\t\"Usergroup\": 2\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add another user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"adding user should give 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"get a json repsonse\", function () {",
+									"   pm.response.to.be.json; ",
+									"});",
+									"",
+									"pm.test(\"get same value for user as sent in\", function () {",
+									"    //var body = JSON.parse(responseBody);",
+									"    //pm.expect(body.Title).to.eql(pm.request.Title);",
+									"    pm.expect(pm.response.Name).to.eql(pm.request.Name);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"TestName 4\",\n\t\"Address\": \"TestAddress 4\",\n\t\"Email\": \"test4@test.com\",\n\t\"Telephone\": \"444-4444\",\n\t\"Usergroup\": 2\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"response to give status code 200\", function () {",
+									"    pm.response.to.be.ok; ",
+									"});",
+									"",
+									"pm.test(\"response has a json body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"response's json body is not empty\", function () {",
+									"    pm.expect(responseBody.length).not.eql(0);",
+									"    pm.expect(responseBody).not.eql(null);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get user that doesn't exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"user does not exist\"), function () {",
+									"    pm.response.to.be.notFound;",
+									"};"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1000"
+							]
+						},
+						"description": "Checking for an ID that doesn't exist"
+					},
+					"response": []
+				},
+				{
+					"name": "Update user that doesn't exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"user does not exist\"), function () {",
+									"    pm.response.to.be.notFound;",
+									"};"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Try Name 1000\",\n\t\"Address\": \"Try Address 1000\",\n\t\"Email\": \"try1000@test.com\",\n\t\"Telephone\": \"111-1000\",\n\t\"Usergroup\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1000"
+							]
+						},
+						"description": "Checking for an ID that doesn't exist"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove user that doesn't exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"user does not exist\"), function () {",
+									"    pm.response.to.be.notFound;",
+									"};"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1000"
+							]
+						},
+						"description": "Checking for an ID that doesn't exist"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Outloans",
+			"description": "",
+			"item": [
+				{
+					"name": "Get user 1 loans (no loans)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"books"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new loan for userID=1 with bookID=1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/1/books/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"books",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get user 1 loans (1 loan)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"books"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Change user 1 loan for book 1",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UserId\": \"1\",\n\t\"BookId\": \"1\",\n\t\"LoanDate\": \"2011-01-01\",\n\t\"ReturnDate\": \"null\",\n\t\"Returned\": 0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/1/books/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"books",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add user 1 loan for book 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1/books/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"books",
+								"2"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove user 1 loan for book 2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1/books/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"books",
+								"2"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add user 3 loan for book 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/3/books/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"3",
+								"books",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Change user 3 loan for book 1 to book 2",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UserId\": \"3\",\n\t\"BookId\": \"2\",\n\t\"LoanDate\": \"2011-01-01\",\n\t\"ReturnDate\": \"null\",\n\t\"Returned\": 0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/3/books/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"3",
+								"books",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all user 1 reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"reviews"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get user 1 reviews for book 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1/reviews/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"reviews",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add user 1 review to book 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Rating\": 5,\n\t\"Text\": null\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/1/reviews/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"reviews",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get user 1 reviews for book 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1/reviews/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"reviews",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Change user 1 review to book 1",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Rating\": 6,\n\t\"Text\": null\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/1/reviews/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"reviews",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get user 1 reviews for book 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1/reviews/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"reviews",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add user 1 review to book 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Rating\": 5,\n\t\"Text\": \"Fun\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/1/reviews/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"reviews",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add user 1 review to book 3",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Rating\": 5,\n\t\"Text\": \"Fun\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/1/reviews/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"reviews",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all user 1 reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"reviews"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove user 1 review to book 2",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Rating\": 6,\n\t\"Text\": null\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/1/reviews/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"reviews",
+								"2"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all user 1 reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"reviews"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reviews for all books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"reviews"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reviews for book 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books/1/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"1",
+								"reviews"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get user 1 review for book 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books/1/reviews/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"1",
+								"reviews",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get user 1 review for book 1",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Rating\": 7,\n\t\"Text\": null\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/books/1/reviews/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"1",
+								"reviews",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get user 1 review for book 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books/1/reviews/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"1",
+								"reviews",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove user 1 review for book 2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books/2/reviews/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"2",
+								"reviews",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reviews for all books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/books/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"reviews"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Recommendations",
+			"description": "",
+			"item": [
+				{
+					"name": "Get user 1 recommendations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/users/1/recommendation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"1",
+								"recommendation"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
