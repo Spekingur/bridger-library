@@ -31,7 +31,7 @@ namespace API.Controllers
 
         // GET /books/5
         [HttpGet]
-        [Route("{id}")]
+        [Route("{id}", Name = "GetBookById")]
         public IActionResult GetBookById(int id)
         {
             var book = _bookService.GetBookById(id);
@@ -52,7 +52,8 @@ namespace API.Controllers
             var user = _bookService.AddNewBook(newBook);
 
             //return Ok(user);
-            return Created($"/books/newBook.Id", newBook);
+            //return Created($"/books/newBook.Id", newBook);
+            return CreatedAtRoute("GetBookById", new { Id = user.Id }, newBook);
         }
 
         // PUT /books/5
