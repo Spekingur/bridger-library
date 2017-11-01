@@ -146,7 +146,11 @@ namespace API.Controllers
         [Route("{userId}/reviews/{bookId}")]
         public IActionResult GetUserReviewForABook(int userId, int bookId)
         {
-            return Ok();
+            var review = _reviewService.GetReviewDetails(userId, bookId);
+
+            if(review == null) { return NotFound(); }
+
+            return Ok(review);
         }
 
         // POST /users/5/reviews/2
@@ -154,7 +158,14 @@ namespace API.Controllers
         [Route("{userId}/reviews/{bookId}")]
         public IActionResult AddNewReview(int userId, int bookId, [FromBody]ReviewViewModel newReview)
         {
-            return Ok();
+            if(newReview == null) { return BadRequest(); }
+            if(!ModelState.IsValid) { return StatusCode(412); }
+
+            var review = _reviewService.AddNewReview(bookId, userId, newReview);
+
+            if(review == null) { return NotFound(); }
+
+            return Ok(review);
         }
 
         // DELETE /users/5/reviews/2
@@ -162,7 +173,9 @@ namespace API.Controllers
         [Route("{userId}/reviews/{bookId}")]
         public IActionResult RemoveReview(int userId, int bookId)
         {
-            return Ok();
+            var success = _reviewService.RemoveBookReview(bookId, userId);
+            if(!success) { return NotFound(); }
+            return NoContent();
         }
 
         // PUT /users/5/reviews/2
@@ -170,7 +183,14 @@ namespace API.Controllers
         [Route("{userId}/reviews/{bookId}")]
         public IActionResult UpdateReview(int userId, int bookId, [FromBody]ReviewViewModel updatedReview)
         {
-            return Ok();
+            if(updatedReview == null) { return BadRequest(); }
+            if(!ModelState.IsValid) { return StatusCode(412); }
+
+            var review = _reviewService.UpdateBookReview(userId, bookId, updatedReview);
+
+            if(review == null) { return NotFound(); }
+
+            return Ok(review);
         }
 
         // GET /users/5/recommendation

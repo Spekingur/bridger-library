@@ -87,7 +87,8 @@ namespace API.Controllers
         [Route("reviews")]
         public IActionResult GetAllReviews()
         {
-            return Ok();
+            var reviews = _reviewService.GetAllReviews();
+            return Ok(reviews);
         }
 
         // GET /books/5/reviews
@@ -95,7 +96,10 @@ namespace API.Controllers
         [Route("{bookId}/reviews")]
         public IActionResult GetReviewByBookId(int bookId)
         {
-            return Ok();
+            var reviews = _reviewService.GetAllReviewsOfABook(bookId);
+
+            if(reviews == null) { return NotFound(); }
+            return Ok(reviews);
         }
 
         // GET /books/5/reviews/2
@@ -103,7 +107,11 @@ namespace API.Controllers
         [Route("{bookId}/reviews/{userId}")]
         public IActionResult GetReviewByBookIdAndUserId(int bookId, int userId)
         {
-            return Ok();
+            var review = _reviewService.GetReviewDetails(userId, bookId);
+
+            if(review == null) { return NotFound(); }
+
+            return Ok(review);
         }
 
         // PUT /books/5/reviews/2
@@ -111,7 +119,13 @@ namespace API.Controllers
         [Route("{bookId}/reviews/{userId}")]
         public IActionResult UpdateReview(int bookId, int userId, [FromBody]ReviewViewModel updatedReview)
         {
-            return Ok();
+            if(updatedReview == null) { return BadRequest(); }
+            if(!ModelState.IsValid) { return StatusCode(412); }
+
+            var review = _reviewService.UpdateBookReview(userId, bookId, updatedReview);
+
+            if(review == null) { return NotFound(); }
+            return Ok(review);
         }
 
         // DELETE /books/5/reviews/2
@@ -119,7 +133,9 @@ namespace API.Controllers
         [Route("{bookId}/reviews/{userId}")]
         public IActionResult RemoveReview(int bookId, int userId)
         {
-            return Ok();
+            var success = _reviewService.RemoveBookReview(bookId, userId);
+            if(!success) { return NotFound(); }
+            return NoContent();
         }
     }
 }
