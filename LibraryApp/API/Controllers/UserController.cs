@@ -14,12 +14,14 @@ namespace API.Controllers
         private IUserService _userService;
         private IOutloanService _outloanService;
         private IReviewService _reviewService;
+        private IRecommendationService _recommendationService;
 
-        public UserController(IUserService userService, IOutloanService outloanService, IReviewService reviewService)
+        public UserController(IUserService userService, IOutloanService outloanService, IReviewService reviewService, IRecommendationService recommendationService)
         {
             _userService = userService;
             _outloanService = outloanService;
             _reviewService = reviewService;
+            _recommendationService = recommendationService;
         }
 
         // GET /users
@@ -198,7 +200,25 @@ namespace API.Controllers
         [Route("{userId}/Recommendation")]
         public IActionResult GetRecommendations(int userId)
         {
-            return Ok();
+            var recommendations = _recommendationService.GetRecommendationsByUserId(userId);
+            if(recommendations == null) { return NotFound(); }
+
+            return Ok(recommendations);
+        }
+
+        // POST /users/5/recommendation
+        [HttpPost]
+        [Route("{userId}/Recommendation")]
+        public IActionResult AddRecommendation(int userId, RecommendationViewModel newRecommendation)
+        {
+            if(newRecommendation == null) { return BadRequest(); }
+            if(!ModelState.IsValid) { return StatusCode(412); }
+
+            var recommendation = _recommendationService.AddNewRecommendation(userId, newRecommendation);
+
+            if(recommendation == null) { return NotFound(); }
+
+            return Ok(recommendation);
         }
     }
 }
