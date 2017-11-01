@@ -55,6 +55,8 @@ namespace LibraryApp.Repositories
                             Title = b.Title,
                             Author = b.Author
                         }).ToList();
+                        
+            if(reco == null) { return null; }
             return reco;
         }
     }
