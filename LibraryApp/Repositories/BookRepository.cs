@@ -37,9 +37,7 @@ namespace LibraryApp.Repositories
                 Author = book.Author,
                 ReleaseDate = book.ReleaseDate,
                 Isbn = book.Isbn,
-                DateAdded = book.DateAdded,
-                Outloans = null,
-                Reviews = null
+                DateAdded = book.DateAdded
             };
         }
 
@@ -117,6 +115,8 @@ namespace LibraryApp.Repositories
             var book = (from b in _db.Books
                             where b.Id == bookId
                             select b).SingleOrDefault();
+            
+            if(book == null) { return null; } 
 
             book.Title = updatedBook.Title;
             book.Author = updatedBook.Author;

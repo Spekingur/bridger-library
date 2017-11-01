@@ -90,6 +90,8 @@ namespace LibraryApp.Repositories
             var loan = (from l in _db.Outloans
                             where (l.UserId == userId) && (l.BookId == bookId)
                             select l).SingleOrDefault();
+
+            if(loan == null) { return null; }
             
             loan.BookId = updateLoan.BookId;
             loan.UserId = updateLoan.UserId;

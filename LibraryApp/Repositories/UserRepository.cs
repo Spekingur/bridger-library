@@ -38,7 +38,7 @@ namespace LibraryApp.Repositories
             var userAdded = (from u in _db.Users
                                 where u.Id == user.Id
                                 select u).SingleOrDefault();
-            var loans = (from l in _db.Outloans
+            /*var loans = (from l in _db.Outloans
                             where l.UserId == user.Id
                             join b in _db.Books on l.BookId equals b.Id
                             select new OutloanListBooksDTO
@@ -56,7 +56,7 @@ namespace LibraryApp.Repositories
                                 Id = r.Id,
                                 Title = b.Title,
                                 Rating = r.Rating
-                            }).ToList();
+                            }).ToList();*/
 
             return new UserDetailsDTO
             {
@@ -66,9 +66,7 @@ namespace LibraryApp.Repositories
                 Email = userAdded.Email,
                 Telephone = userAdded.Telephone,
                 RegisterDate = userAdded.RegisterDate,
-                Usergroup = userAdded.Usergroup,
-                Outloans = loans,
-                Reviews = reviews
+                Usergroup = userAdded.Usergroup 
             };
 
         }
@@ -124,7 +122,7 @@ namespace LibraryApp.Repositories
         public UserDetailsDTO GetUserById(int userId)
         {
             var user = (from u in _db.Users
-                            where u.Id == userId
+                            where (u.Id == userId) && (u.Active == true)
                             select new UserDetailsDTO
                             {
                                 Id = u.Id,
@@ -160,7 +158,7 @@ namespace LibraryApp.Repositories
         public bool RemoveUser(int userId)
         {
             var user = (from u in _db.Users
-                            where u.Id == userId
+                            where (u.Id == userId) && (u.Active == true)
                             select u).SingleOrDefault();
 
             if(user == null) { return false; }
@@ -175,6 +173,8 @@ namespace LibraryApp.Repositories
             var user = (from u in _db.Users
                             where u.Id == userId
                             select u).SingleOrDefault();
+            
+            if(user == null) { return null; }
 
             user.Name = updatedUser.Name;
             user.Address = updatedUser.Address;
